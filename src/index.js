@@ -58,13 +58,23 @@ class PostCard extends React.Component {
         return this.props.content ? this.props.content.img_src : "logo192.png";
     }
 
+    titleText() {
+        if (this.props.content) {
+            if (this.props.content.link) {
+                return this.props.content.link.displayText;
+            }
+            return "ERROR (1)"; // Display Text Error 
+        }
+        return "ERROR (2)"; // Props Error
+    }
+
     render() {
         return <Grid item>
             <Card>
                 <img src={this.state.imgUrlValue} key={Date.now()} width="192px" height="192px"/>
                 <CardContent style={{padding:"25px"}}>
                     <Typography>{
-                        this.props.content ? this.props.content.link.displayText : "..."}</Typography>
+                        this.titleText()}</Typography>
                     <form key={this.props.value}>
                     <InputLabel id="">Song/Album</InputLabel>
                     <Select
